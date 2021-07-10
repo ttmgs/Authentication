@@ -39,7 +39,8 @@ mongoose.set("useCreateIndex", true);
 const userSchema = new mongoose.Schema({
   email: String,
   Password: String,
-  googleId: String
+  googleId: String,
+  secret: String
 });
 
 // used to hash and salt passwords
@@ -119,15 +120,46 @@ app.get("/register", function (req, res) {
   res.render("register");
 });
 
-// renders secrets page only if authenticated
+// renders secrets page 
 app.get("/secrets", function (req, res) {
-  if (req.isAuthenticated()) {
-    res.render("secrets");
+  // checks whole database if secrets is not equal to null if not null it will render the secrets
+User.find(({"secret": {$ne: null}}, function(err, foundUsers){
+  if (err){
+    console.log(err)
   } else {
-    res.redirect("/login");
+    if (foundUsers){
+      res.render("secrets", {usersWithSecrets: foundUsers})
+    }
   }
+}))
+
 });
 
+app.get("/submit", function(req, res){
+  if(req.isAuthenticated()){
+     res.render("submit")
+  } else {
+    res.redirect("/login")
+  }
+});
+app.post("/submit", function(req, res){
+  const submittedSecret = req.body.secret
+
+  console.log(req.user)
+  User.findById(req.user.id, function(err, foundUser){
+    if (err){
+      console.log(err)
+    } else {
+      if (foundUser){
+        foundUser.secret = submittedSecret;
+        foundUser.save(function(){
+          res.redirect("/secrets");
+        })
+      }
+    }
+  })
+
+})
 
 app.get("/logout", function(req, res){
   req.logout();
