@@ -78,7 +78,7 @@ function(accessToken, refreshToken, profile, cb) {
 ));
 
 
-app.get("/", function (req, res) {
+app.get("/host=serene-savannah-28526.herokuapp.com", function (req, res) {
   res.render("home");
 });
 // authentication with google using the user strategy
