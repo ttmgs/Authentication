@@ -13,6 +13,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "engines": {
+    "node": "v14.15.4"
+  },
   "bugs": {
     "url": "https://github.com/ttmgs/Authentication/issues"
   },

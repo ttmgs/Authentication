@@ -12,7 +12,6 @@ const findOrCreate = require('mongoose-findorcreate');
 
 const app = express();
 
-const PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
@@ -29,7 +28,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 mongoose.connect(
-  "mongodb://localhost:27017/userDB",
+  "mongodb+srv://ttmgs:Windsor2000!!@cluster0.xoqvt.mongodb.net/userDB",
   { useNewUrlParser: true },
   { useUnifiedTopology: true },
 );
@@ -181,8 +180,13 @@ app.post("/register", function (req, res) {
   );
 });
 
-app.listen(PORT, function () {
-  console.log("app is listening on http://localhost:" + PORT);
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port = 3000;
+}
+
+app.listen(port, function () {
+  console.log("app is listening on http://localhost:" + port);
 });
 
 
