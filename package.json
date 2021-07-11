@@ -4,13 +4,18 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+    "start:prod": "node app.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ttmgs/Authentication.git"
   },
-  "keywords": [],
+  "keywords": [
+    "example",
+    "heroku"
+  ],
   "author": "",
   "license": "ISC",
   "engines": {
