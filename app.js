@@ -5,7 +5,6 @@ const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const mongoose = require("mongoose");
 const session = require('express-session');
-const MongoStore = require('connect-mongo')(session);
 const passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose");
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
@@ -22,7 +21,6 @@ app.use(express.static("public"));
 app.use(session({
   secret: process.env.SECRET,
   resave: false,
-  store: new MongoStore(options),
   saveUninitialized: false
 }));
 
@@ -63,6 +61,7 @@ passport.deserializeUser(function(id, done) {
     done(err, user);
   });
 });
+
 // google authentication
 passport.use(new GoogleStrategy({
   clientID: process.env.CLIENT_ID,
@@ -77,6 +76,7 @@ function(accessToken, refreshToken, profile, cb) {
   });
 }
 ));
+
 
 app.get("/", function (req, res) {
   res.render("home");
