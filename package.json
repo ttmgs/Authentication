@@ -18,7 +18,8 @@
   "author": "",
   "license": "ISC",
   "engines": {
-    "node": "v14.15.4"
+    "node": "v14.15.4",
+    "npm": "7.18.1"
   },
   "bugs": {
     "url": "https://github.com/ttmgs/Authentication/issues"
