@@ -186,7 +186,7 @@ if (port == null || port == "") {
 }
 
 app.listen(port, function () {
-  console.log("app is listening on http://localhost:" + port);
+  console.log("app is listening on http://localhost:3000");
 });
 
 
